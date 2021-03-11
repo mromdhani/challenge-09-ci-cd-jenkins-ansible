@@ -5,4 +5,4 @@
   tasks:
 
     - name: Copy WAR to webapps
-      copy: src=target/greetings-0.1-SNAPSHOT.war dest=/opt/tomcat/webapps/hello.war owner=vagrant group=vagrant mode=0744
+      copy: src=$WORKSPACE/target/greetings-0.1-SNAPSHOT.war dest=/opt/tomcat/webapps/hello.war owner=vagrant group=vagrant mode=0744
