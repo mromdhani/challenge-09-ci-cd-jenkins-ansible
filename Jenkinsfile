@@ -5,6 +5,7 @@ pipeline {
         maven "my-maven"
     }
 
+
     stages {
       // Clone from Git
         stage("Clone App from Git"){
