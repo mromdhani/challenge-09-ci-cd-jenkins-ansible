@@ -1,8 +1,7 @@
 ---
 - hosts: server-staging
   become: true
-  become_user: vagrant
-  gather_facts: no
+#  become_user: vagrant
   tasks:
 
     - name: Copy WAR to webapps
