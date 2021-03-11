@@ -13,8 +13,7 @@ pipeline {
             steps{
                 echo "====++++  Start SonarQube Server ++++===="
                 
-                 sudo docker run -d --add-host=host.docker.internal:172.17.0.1 --name my-sonarqube -p 9000:9000 sonarqube:lts
-                    
+                sh " sudo docker run -d --add-host=host.docker.internal:172.17.0.1 --name my-sonarqube -p 9000:9000 sonarqube:lts"                    
                 
             }
         }
