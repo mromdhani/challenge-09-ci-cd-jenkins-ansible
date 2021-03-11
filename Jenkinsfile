@@ -16,7 +16,7 @@ pipeline {
                     //   withCredentials([usernameColonPassword(credentialsId: 'user-password-vagrant', variable: 'USERPASS')]) {
                     sh '''
                       set +x
-                      sudo docker run -d --name my-sonarqube -p 9000:9000 sonarqube:lts
+                      sudo docker run -d --net host --name my-sonarqube -p 9000:9000 sonarqube:lts
                     '''
                    //    }
                 
@@ -36,7 +36,20 @@ pipeline {
                 echo "====++++  Build and Unit Test (Maven/JUnit) ++++===="
                 sh "mvn clean package"
             }           
-        }        
+        }  
+
+        // Static Code Analysis (SonarQube)
+        stage("Static Code Analysis (SonarQube)"){
+            steps{
+                echo "====++++  Static Code Analysis (SonarQube) ++++===="                
+                withSonarQubeEnv('my_sonarqube_in_docker') {  
+                sh "mvn clean package clean package -Dsurefire.skip=true sonar:sonar -Dsonar.host.url=http://localhost:9000   -Dsonar.projectName=challenge-09-ci-cd-jenkins-ansible -Dsonar.projectVersion=$BUILD_NUMBER";
+             
+                }  
+            }           
+        }
+
+
          // Deploiement du WAR sur le server-staging avec Ansible
         stage("Deploy WAR on staging using Ansible"){
             steps{
