@@ -14,7 +14,7 @@ pipeline {
                 echo "====++++  Start SonarQube Server ++++===="
                 
                     //   withCredentials([usernameColonPassword(credentialsId: 'user-password-vagrant', variable: 'USERPASS')]) {
-                   //   sudo docker run -d --add-host=host.docker.internal:172.17.0.1 --name my-sonarqube -p 9000:9000 sonarqube:lts
+                      sudo docker run -d --add-host=host.docker.internal:172.17.0.1 --name my-sonarqube -p 9000:9000 sonarqube:lts
                     
                 //      sudo docker run -d --add-host=host.docker.internal:172.17.0.1 --name my-sonarqube -p 9000:9000 sonarqube:lts
                 

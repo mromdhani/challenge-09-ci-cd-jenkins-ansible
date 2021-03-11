@@ -21,7 +21,7 @@ echo " ======  Migrating SSH Keys and Inventory file to the user profile.... "
 echo
 echo "cp -R /vagrant/.vagrant/  /home/vagrant/" >> /home/vagrant/.profile
 echo "chmod -R 700  /home/vagrant/.vagrant" >> /home/vagrant/.profile
-echo "sudo cp -p /vagrant/hosts  /etc/ansible/" >> /home/vagrant/.profile
+echo "sudo cp -p /vagrant/hosts  /home/vagrant/" >> /home/vagrant/.profile
 
 SCRIPT
 
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
          # Customize the amount of memory on the VM:
          vb.name = "server-jenkins"
          vb.cpus = 2
-	 vb.memory = "4096"
+	 vb.memory = "10240"
     end
     subconfig.vm.provision "shell", inline: $provisionAnsible  
   end
