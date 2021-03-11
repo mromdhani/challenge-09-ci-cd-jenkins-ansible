@@ -14,11 +14,9 @@ pipeline {
                 echo "====++++  Start SonarQube Server ++++===="
                 
                     //   withCredentials([usernameColonPassword(credentialsId: 'user-password-vagrant', variable: 'USERPASS')]) {
-                    sh '''
-                      set +x
-                      sudo docker run -d --net host --name my-sonarqube -p 9000:9000 sonarqube:lts
-                    '''
-                   //    }
+                   //   sudo docker run -d --add-host=host.docker.internal:172.17.0.1 --name my-sonarqube -p 9000:9000 sonarqube:lts
+                    
+                //      sudo docker run -d --add-host=host.docker.internal:172.17.0.1 --name my-sonarqube -p 9000:9000 sonarqube:lts
                 
             }
         }
@@ -42,10 +40,10 @@ pipeline {
         stage("Static Code Analysis (SonarQube)"){
             steps{
                 echo "====++++  Static Code Analysis (SonarQube) ++++===="                
-                withSonarQubeEnv('my_sonarqube_in_docker') {  
-                sh "mvn clean package clean package -Dsurefire.skip=true sonar:sonar -Dsonar.host.url=http://localhost:9000   -Dsonar.projectName=challenge-09-ci-cd-jenkins-ansible -Dsonar.projectVersion=$BUILD_NUMBER";
+          //      withSonarQubeEnv('my_sonarqube_in_docker') {  
+                sh "mvn clean package clean package -Dsurefire.skip=true sonar:sonar -Dsonar.host.url=http://172.17.0.1:9000   -Dsonar.projectName=challenge-09-ci-cd-jenkins-ansible -Dsonar.projectVersion=$BUILD_NUMBER";
              
-                }  
+           //     }  
             }           
         }
 
